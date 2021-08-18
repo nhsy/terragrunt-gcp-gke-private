@@ -16,3 +16,6 @@
 
 # Terraform plan
 *.plan
+
+# local vars
+common_vars.json
