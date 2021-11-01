@@ -1,4 +1,4 @@
-# Include all settings from the root terragrunt.hcl file
+# Include all settings from the parent terragrunt.hcl file
 include {
   path = find_in_parent_folders()
 }
@@ -9,11 +9,12 @@ locals {
 }
 
 terraform {
-  source = "${get_parent_terragrunt_dir()}/../modules//common"
+  source = "${get_parent_terragrunt_dir()}/..//modules/common"
 }
 
 inputs = {
   project_id = local.common_vars.project_id
+  region     = local.common_vars.region
 }
 
 skip = local.skip
