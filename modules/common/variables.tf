@@ -3,11 +3,12 @@ variable "project_id" {
   type        = string
 }
 
-variable "activate_apis" {
-  description = "The list of apis to activate within the project"
-  type        = list(string)
-  default = [
-    "compute.googleapis.com",
-    "container.googleapis.com",
-  ]
+variable "region" {
+  description = "The region to deploy to"
+  type        = string
+
+  validation {
+    condition     = can(regex("(europe-west1|europe-west2|us-central1)", var.region))
+    error_message = "The region must be one of: europe-west1, europe-west2, us-central1."
+  }
 }

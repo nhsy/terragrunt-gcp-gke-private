@@ -10,3 +10,8 @@ resource "random_string" "suffix" {
   upper   = false
 
 }
+
+data "google_compute_zones" "available" {
+  project = var.project_id
+  region  = var.region
+}
