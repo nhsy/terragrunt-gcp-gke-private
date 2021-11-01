@@ -1,9 +1,8 @@
-# Use bash instead of sh
 #SHELL := /usr/bin/env bash
 
 .PHONY: lint
 lint:
-	./scripts/lint.sh
+	@./scripts/lint.sh
 
 .PHONY: setup
 setup:
@@ -11,6 +10,7 @@ setup:
 
 .PHONY: init
 init:
+	@scripts/backend.sh init
 	@scripts/tg-wrapper.sh init
 
 .PHONY: validate
@@ -30,9 +30,22 @@ apply:
 	@scripts/tg-wrapper.sh apply
 
 .PHONY: destroy
-destroy:
+destroy:  init
 	@scripts/tg-wrapper.sh destroy
 
 .PHONY: clean
 clean:
-	@scripts/clean.sh
+
+.PHONY: tunnel
+tunnel: tunnel-iap
+
+.PHONY: tunnel-iap
+tunnel-iap:
+	@scripts/tunnel-iap.sh
+
+.PHONY: tunnel-ssh
+tunnel-ssh:
+	@scripts/tunnel-ssh.sh
+
+.PHONY: all
+all: init validate apply

@@ -6,8 +6,12 @@
 
 # .tfstate files
 
-# IntelliJ
+# Local dev files
+.config
 .idea
+.kube
+.ssh
+.terragrunt-cache
 
 # Terraform state
 **/terraform.tfstate.d/*
