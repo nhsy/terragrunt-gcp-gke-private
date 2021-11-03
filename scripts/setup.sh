@@ -2,8 +2,9 @@
 
 set -euo pipefail
 
-TERRAFORM_VERSION=1.0.4
-TERRAGRUNT_VERSION=0.31.3
+TERRAFORM_VERSION=1.0.10
+TERRAGRUNT_VERSION=0.35.6
+TFSEC_VERSION=0.58.15
 
 if [ "$(uname)" == "Darwin" ]; then
     OSTYPE=darwin
@@ -15,7 +16,6 @@ fi
 wget -O /tmp/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_${OSTYPE}_amd64
 chmod +x /tmp/terragrunt
 mv /tmp/terragrunt /usr/local/bin
-terragrunt -version
 
 # Install terraform
 wget -O /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_${OSTYPE}_amd64.zip
@@ -23,4 +23,13 @@ unzip -q /tmp/terraform.zip -d /tmp
 chmod +x /tmp/terraform
 mv /tmp/terraform /usr/local/bin
 rm /tmp/terraform.zip
-terraform --version
+
+# Install tfsec
+wget -O /tmp/tfsec https://github.com/aquasecurity/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-${OSTYPE}-amd64
+chmod +x /tmp/tfsec
+chown root.root /tmp/tfsec
+mv /tmp/tfsec /usr/local/bin
+
+terraform version
+terragrunt -version
+tfsec --version
