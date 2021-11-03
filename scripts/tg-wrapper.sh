@@ -7,4 +7,9 @@ if [ -z "$1" ]
 fi
 
 cd resources
-terragrunt run-all $1 --terragrunt-non-interactive
+if [ -n "$TG_DEBUG" ]
+  then
+    terragrunt run-all $1 --terragrunt-non-interactive --terragrunt-log-level debug
+else
+    terragrunt run-all $1 --terragrunt-non-interactive
+fi

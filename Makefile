@@ -8,6 +8,11 @@ lint:
 setup:
 	@scripts/setup.sh
 
+.PHONY: prereqs
+prereqs:
+	@scripts/pre-reqs.sh
+
+
 .PHONY: init
 init:
 	@scripts/backend.sh init
@@ -16,6 +21,7 @@ init:
 .PHONY: validate
 validate:
 	@scripts/tg-wrapper.sh validate
+	@scripts/tg-wrapper.sh validate-inputs
 
 .PHONY: refresh
 refresh:
@@ -35,6 +41,7 @@ destroy:  init
 
 .PHONY: clean
 clean:
+	@scripts/clean.sh
 
 .PHONY: tunnel
 tunnel: tunnel-iap
@@ -48,4 +55,4 @@ tunnel-ssh:
 	@scripts/tunnel-ssh.sh
 
 .PHONY: all
-all: init validate apply
+all: prereqs init validate apply

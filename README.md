@@ -27,6 +27,7 @@ The following tools are required:
 - kubectl
 - Terraform v1.04+
 - Terragrunt v0.30.0+
+- TFsec
 
 All the tools above a pre-installed with Google Cloud Shell, except Terraform and Terragrunt.
 

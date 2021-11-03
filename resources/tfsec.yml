@@ -1,0 +1,10 @@
+---
+exclude:
+  - GEN001
+  - google-gke-enable-master-networks
+  - google-gke-enable-network-policy
+  - google-gke-enable-private-cluster
+  - google-gke-enforce-pod-security-policy
+  - google-gke-no-legacy-auth
+  - google-gke-node-pool-uses-cos
+  - google-gke-use-service-account
