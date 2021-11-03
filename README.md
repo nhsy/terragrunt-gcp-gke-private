@@ -40,11 +40,11 @@ A GCP project with the following permissions are required:
 - roles/iap.tunnelResourceAccessor
 
 ## Setup
-Create the file environment/common_vars.json as follows:
+Create the file resources/common_vars.json as follows:
 ```json
 {
   "project_id": "_project_",
-  "region": "_region_",
+  "region": "_region_"
 }
 ```
 _Optional:_ The command `make setup` will download and install terraform and terragrunt.

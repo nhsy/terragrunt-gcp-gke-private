@@ -1,8 +1,8 @@
 #!/bin/bash
 
-set -euo pipefail
+set -xeuo pipefail
 
-cd ./environment
+cd ./resources
 terragrunt hclfmt
 terraform fmt -recursive
 

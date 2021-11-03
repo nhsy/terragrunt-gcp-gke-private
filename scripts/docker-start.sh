@@ -1,17 +1,10 @@
-NAME="$(basename $PWD)"
-
-if [ "$(docker ps -qa -f name=$NAME)" ]; then
-    echo "Found container - $NAME"
-else
-  echo "Creating container - $NAME"
-  docker create -ti \
-      -v "$(pwd)":/work \
-      -v "$(pwd)"/.config:/root/.config \
-      -v "$(pwd)"/.ssh:/root/.ssh \
-      -w /work \
-      --name $NAME \
-      gcp-devops
-fi
+NAME="$(basename $PWD)"-$RANDOM
 
 echo "Starting container - $NAME"
-docker start -ai $NAME
+docker run -ti --rm \
+    -v "$(pwd)"/.config:/root/.config \
+    -v "$(pwd)"/.ssh:/root/.ssh \
+    -v "$(pwd)":/work \
+    -w /work \
+    --name $NAME \
+    gcp-devops

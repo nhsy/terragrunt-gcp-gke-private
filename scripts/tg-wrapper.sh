@@ -6,5 +6,5 @@ if [ -z "$1" ]
     exit 1
 fi
 
-cd environment
+cd resources
 terragrunt run-all $1 --terragrunt-non-interactive

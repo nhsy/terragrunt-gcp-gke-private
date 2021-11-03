@@ -2,11 +2,11 @@
 
 PROXY_PORT=8080
 
-GKE_CLUSTER=$(cd environment/04-gke && terragrunt output -raw name)
-GKE_CLUSTER_TYPE=$(cd environment/04-gke && terragrunt output -raw type)
-PROXY_NAME=$(cd environment/03-proxy && terragrunt output -raw proxy_name)
-REGION=$(cd environment/01-common && terragrunt output -raw region)
-ZONE=$(cd environment/01-common && terragrunt output -raw zone)
+GKE_CLUSTER=$(cd resources/04-gke && terragrunt output -raw name)
+GKE_CLUSTER_TYPE=$(cd resources/04-gke && terragrunt output -raw type)
+PROXY_NAME=$(cd resources/03-proxy && terragrunt output -raw proxy_name)
+REGION=$(cd resources/01-common && terragrunt output -raw region)
+ZONE=$(cd resources/01-common && terragrunt output -raw zone)
 
 echo GKE_CLUSTER: $GKE_CLUSTER
 echo GKE_CLUSTER_TYPE: $GKE_CLUSTER_TYPE
