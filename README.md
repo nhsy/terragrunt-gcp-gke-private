@@ -21,15 +21,14 @@ Google Cloud Shell is the preferred development environment for deploying this e
 
 The following tools are required:
 - Bash Shell
-- Google Cloud SDK v330+
-- Google Cloud Shell
-- jq
-- kubectl
+- Google Cloud SDK v3.30.0+
+- Jq
+- Kubectl
 - Terraform v1.04+
 - Terragrunt v0.30.0+
 - TFsec
 
-All the tools above a pre-installed with Google Cloud Shell, except Terraform and Terragrunt.
+All the tools above a pre-installed with Google Cloud Shell, except Terraform, Terragrunt and TFsec.
 
 ### IAM
 A GCP project with the following permissions are required:
@@ -48,7 +47,37 @@ Create the file resources/common_vars.json as follows:
   "region": "_region_"
 }
 ```
-_Optional:_ The command `make setup` will download and install terraform and terragrunt.
+### Optional Local Setup 
+The command `make setup` will download and install terraform, terragrunt and tfsec.
+
+### Optional Docker / Podman Setup
+A container image containing all the tools pre-installed for local development can be created by cloning the repository https://github.com/nhsy/gcp-devops.
+
+Please ensure either Docker or Podman is pre-installed and execute one of the following to build the container locally.
+
+For docker:
+```bash
+git clone https://github.com/nhsy/gcp-devops.git
+cd gcp-devops
+make build
+```
+For podman:
+```bash
+git clone https://github.com/nhsy/gcp-devops.git
+cd gcp-devops
+make pod-build
+```
+
+To launch the container image and bind mount the current directory execute the following from the root directory of this repository.
+
+For docker:
+```bash
+./scripts/docker-start.sh
+```
+For podman:
+```bash
+./scripts/podman-start.sh
+```
 
 ## Usage
 ### Deployment
