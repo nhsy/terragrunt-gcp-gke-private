@@ -6,9 +6,10 @@ include {
 dependency "common" {
   config_path = "../01-common"
   mock_outputs = {
-    unique_id = "abcde",
-    zone      = "europe-west1-b",
-    zones     = ["europe-west1-b"],
+    project_number = 12345
+    unique_id      = "abcde",
+    zone           = "europe-west1-b",
+    zones          = ["europe-west1-b"],
   }
 }
 
@@ -34,7 +35,7 @@ locals {
 }
 
 terraform {
-  source = "github.com/terraform-google-modules/terraform-google-kubernetes-engine//modules/beta-private-cluster?ref=v16.0.1"
+  source = "github.com/terraform-google-modules/terraform-google-kubernetes-engine//modules/beta-private-cluster?ref=v17.1.0"
 }
 
 inputs = {
@@ -53,6 +54,9 @@ inputs = {
   remove_default_node_pool   = true
   subnetwork                 = dependency.network.outputs.subnets_names[0]
   project_id                 = local.common_vars.project_id
+  cluster_resource_labels = {
+    "mesh_id" : format("proj-%s", dependency.common.outputs.project_number)
+  }
 
   master_authorized_networks = [
     {
