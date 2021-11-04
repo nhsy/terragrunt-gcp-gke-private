@@ -16,3 +16,4 @@ echo "TG environment variables:"
 env | grep "TG_"
 
 alias kp='HTTPS_PROXY=localhost:8080 kubectl $*'
+alias np='HTTPS_PROXY=localhost:8080 nomos $*'
