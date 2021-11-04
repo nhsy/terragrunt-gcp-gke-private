@@ -2,16 +2,15 @@
 
 .PHONY: lint
 lint:
-	@./scripts/lint.sh
+	@scripts/lint.sh
 
 .PHONY: setup
 setup:
 	@scripts/setup.sh
 
-.PHONY: prereqs
-prereqs:
+.PHONY: pre-reqs
+pre-reqs:
 	@scripts/pre-reqs.sh
-
 
 .PHONY: init
 init:
@@ -53,6 +52,10 @@ tunnel-iap:
 .PHONY: tunnel-ssh
 tunnel-ssh:
 	@scripts/tunnel-ssh.sh
+
+.PHONY: config-sync
+config-sync:
+	@scripts/config-sync-install.sh
 
 .PHONY: all
 all: prereqs init validate apply
