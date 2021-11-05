@@ -39,6 +39,20 @@ A GCP project with the following permissions are required:
 - roles/storage.admin
 - roles/iap.tunnelResourceAccessor
 
+In order to run the deployment, Google authentication needs to be setup unless using Google Cloud Shell.
+
+If a service account is being used, set the environment `GOOGLE_APPLICATION_CREDENTIALS` as follows:
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS=/path-to-credentials.json
+gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+````
+
+If a user account is being use, execute the following:
+```bash
+gcloud auth login
+gcloud auth application-default login
+````
+
 ## Setup
 Create the file resources/common_vars.json as follows:
 ```json
