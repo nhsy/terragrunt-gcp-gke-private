@@ -48,7 +48,7 @@ Create the file resources/common_vars.json as follows:
 }
 ```
 ### Optional Local Setup 
-The command `make setup` will download and install terraform, terragrunt and tfsec.
+The command `sudo make setup` will download and install terraform, terragrunt and tfsec.
 
 ### Optional Docker / Podman Setup
 A container image containing all the tools pre-installed for local development can be created by cloning the repository https://github.com/nhsy/gcp-devops.
