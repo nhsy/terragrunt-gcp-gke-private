@@ -1,4 +1,4 @@
-# gcp-terragrunt-gke-private
+# terragrunt-gcp-gke-private
 
 ## Overview
 This example deploys an opinionated GKE Private cluster and demonstrates how to connect to the GKE Private Endpoint using IAP tunneling.
