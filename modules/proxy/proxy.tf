@@ -28,7 +28,7 @@ module "compute-instance" {
   #region             = var.region
   subnetwork         = var.subnet_name
   subnetwork_project = var.project_id
-  zone               = data.google_compute_zones.available.names[0]
+  zone               = var.zone
 
   depends_on = [module.service-account]
 }

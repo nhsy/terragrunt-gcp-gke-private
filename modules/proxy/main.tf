@@ -4,8 +4,3 @@ locals {
   service_account_email  = format("%s@%s.%s", local.sa_name, var.project_id, "iam.gserviceaccount.com")
   service_account_object = { email = local.service_account_email, scopes = ["cloud-platform"] }
 }
-
-data "google_compute_zones" "available" {
-  project = var.project_id
-  region  = var.region
-}

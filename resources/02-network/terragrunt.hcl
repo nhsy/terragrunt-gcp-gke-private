@@ -57,7 +57,7 @@ inputs = {
     },
     "allow-iap-${dependency.common.outputs.unique_id}" : {
       "action" : "allow",
-      "description" : "Allow inbound SSH connections from IAP",
+      "description" : "Allow inbound connections from IAP",
       "direction" : "INGRESS",
       "extra_attributes" : {},
       "ranges" : [
@@ -75,25 +75,6 @@ inputs = {
       ],
       "sources" : null,
       "targets" : ["iap"],
-      "use_service_accounts" : false
-    },
-    "allow-ilb-health-check-${dependency.common.outputs.unique_id}" : {
-      "action" : "allow",
-      "description" : "Allow incoming health checks",
-      "direction" : "INGRESS",
-      "extra_attributes" : {},
-      "ranges" : [
-        "130.211.0.0/22",
-        "35.191.0.0/16"
-      ],
-      "rules" : [
-        {
-          ports : ["3128"],
-          protocol : "tcp"
-        }
-      ],
-      "sources" : null,
-      "targets" : ["ilb-health-check"],
       "use_service_accounts" : false
     },
     "allow-gke-webhooks-${dependency.common.outputs.unique_id}" : {
