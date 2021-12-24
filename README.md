@@ -5,9 +5,12 @@ This example deploys an opinionated GKE Private cluster and demonstrates how to 
 
 The following resources are deployed:
 
-* GKE Regional / Zonal Cluster
-* Network
-* Google Compute Engine - Proxy
+- Cloud NAT
+- Cloud Router
+- Google Cloud Storage
+- GKE Zonal Cluster
+- Proxy GCE VM
+- VPC
 
 Preemptible VMs are deployed to reduce costs.
 
@@ -47,7 +50,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=/path-to-credentials.json
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 ````
 
-If a user account is being use, execute the following:
+If a user account is being used, execute the following:
 ```bash
 gcloud auth login
 gcloud auth application-default login
@@ -142,7 +145,7 @@ The common_vars.json file can be customised as follows:
 ```json
 {
   "project_id": "_project_",
-  "region": "_region_",
+  "region": "europe-west1",
 
   "preemptible": "true",
  
