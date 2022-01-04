@@ -3,8 +3,8 @@ remote_state {
 
   config = {
     bucket               = get_env("TG_BUCKET")
-    prefix               = "gcp-terragrunt-gke-private/${path_relative_to_include()}"
-    skip_bucket_creation = false
+    prefix               = "terragrunt-gcp-gke-private/${path_relative_to_include()}"
+    skip_bucket_creation = true
   }
 }
 
