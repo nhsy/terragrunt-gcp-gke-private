@@ -1,5 +1,9 @@
 NAME="$(basename $PWD)"-$RANDOM
 
+# Create mount dirs if missing
+test -d .config || mkdir .config
+test -d .ssh || mkdir .ssh
+
 echo "Starting container - $NAME"
 podman run -ti --rm \
     -v "$(pwd)"/.config:/root/.config \
