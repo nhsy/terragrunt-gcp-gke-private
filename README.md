@@ -27,7 +27,7 @@ The following tools are required:
 - Google Cloud SDK v3.30.0+
 - Jq
 - Kubectl
-- Terraform v1.04+
+- Terraform v1.1.0+
 - Terragrunt v0.30.0+
 - TFsec
 
