@@ -16,8 +16,6 @@ if [[ -z "$GKE_CLUSTER" ]]; then
   exit 1
 fi
 
-#HTTPS_PROXY=localhost:8080 kubectl apply -f https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
-
 # Install flux cli
 command -v flux || curl -s https://fluxcd.io/install.sh | sudo bash
 
