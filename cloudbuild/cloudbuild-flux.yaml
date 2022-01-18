@@ -32,4 +32,4 @@ steps:
       source ./scripts/oauth.sh      
       source ./scripts/env.sh
       make init
-      echo $(cd resources/04-gke; terragrunt output)
+      ./scripts/flux-install.sh
