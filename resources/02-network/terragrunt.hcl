@@ -13,11 +13,13 @@ dependency "common" {
 locals {
   common_vars = jsondecode(file("${get_parent_terragrunt_dir()}/common_vars.json"))
 
-  project_id  = local.common_vars.project_id
-  region      = local.common_vars.region
-  skip        = lookup(local.common_vars, "skip_network", false)
-  subnet_name = "snet-${local.common_vars.region}"
-  subnet_cidr = "10.64.0.0/20"
+  project_id        = local.common_vars.project_id
+  region            = local.common_vars.region
+  skip              = lookup(local.common_vars, "skip_network", false)
+  subnet_name       = "snet-${local.common_vars.region}"
+  subnet_cidr       = lookup(local.common_vars, "subnet_cidr", "10.0.0.0/16")
+  gke_pods_cidr     = lookup(local.common_vars, "gke_pods_cidr", "10.1.0.0/16")
+  gke_services_cidr = lookup(local.common_vars, "gke_services_cidr", "10.2.0.0/16")
 }
 
 terraform {
@@ -118,11 +120,11 @@ inputs = {
     "${local.subnet_name}" = [
       {
         range_name    = "gke-services"
-        ip_cidr_range = "192.168.64.0/23"
+        ip_cidr_range = local.gke_services_cidr
       },
       {
         range_name    = "gke-pods"
-        ip_cidr_range = "192.168.128.0/19"
+        ip_cidr_range = local.gke_pods_cidr
       }
     ]
   }
