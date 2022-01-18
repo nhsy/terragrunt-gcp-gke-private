@@ -1,0 +1,35 @@
+timeout: 1200s
+substitutions:
+  _TF_SA_PREFIX: 'terraform'
+  _TF_ACTION: 'plan'
+
+steps:
+- id: 'setup'
+  name: dizzyplan/gcp-devops:amazonlinux
+  entrypoint: '/bin/bash'
+  args:
+  - -c
+  - |
+    set -xe    
+    tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
+    if [[ -n ${tf_sa_email} ]]; then
+      echo "Setting up gcloud for impersonation"
+      gcloud config set auth/impersonate_service_account $tf_sa_email
+    fi
+    cd resources
+    cp common_vars.json.example common_vars.json
+    sed -i "s/_project_/${PROJECT_ID}/g" common_vars.json 
+    cat common_vars.json
+
+- id: 'flux'
+  name: dizzyplan/gcp-devops:amazonlinux
+  entrypoint: '/bin/bash'
+  args:
+    - -c
+    - |
+      set -e
+      echo "Setting up oauth and environment variables"
+      source ./scripts/oauth.sh      
+      source ./scripts/env.sh
+      make init
+      echo $(cd resources/04-gke; terragrunt output)
