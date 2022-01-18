@@ -24,9 +24,6 @@ command -v flux || curl -s https://fluxcd.io/install.sh | sudo bash
 HTTPS_PROXY=localhost:8080 flux check --pre
 
 HTTPS_PROXY=localhost:8080 flux install
-#--namespace=flux-system \
-#--network-policy=false \
-#--components=source-controller,helm-controller
 
 # Create demo namespace
 HTTPS_PROXY=localhost:8080 kubectl create namespace demo || true # ignore errors, if ns already exists
