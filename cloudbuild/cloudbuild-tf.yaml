@@ -10,7 +10,7 @@ steps:
   args:
   - -c
   - |
-    set -xe    
+    set -e    
     tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
     if [[ -n ${tf_sa_email} ]]; then
       echo "Setting up gcloud for impersonation"
