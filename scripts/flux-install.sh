@@ -26,6 +26,7 @@ HTTPS_PROXY=localhost:8080 flux install
 # Create demo namespace
 HTTPS_PROXY=localhost:8080 kubectl create namespace demo || true # ignore errors, if ns already exists
 
+# Configure sync repos
 HTTPS_PROXY=localhost:8080 flux create source git podinfo \
   --url=https://github.com/nhsy/podinfo \
   --branch=demo \
