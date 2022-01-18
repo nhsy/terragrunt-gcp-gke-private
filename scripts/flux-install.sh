@@ -16,31 +16,33 @@ if [[ -z "$GKE_CLUSTER" ]]; then
   exit 1
 fi
 
-HTTPS_PROXY=localhost:8080 kubectl apply -f https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
+#HTTPS_PROXY=localhost:8080 kubectl apply -f https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
 
 # Install flux cli
 command -v flux || curl -s https://fluxcd.io/install.sh | sudo bash
 
+HTTPS_PROXY=localhost:8080 flux install \
+--namespace=flux-system \
+--network-policy=false \
+--components=source-controller,helm-controller
+
 # Create demo namespace
 HTTPS_PROXY=localhost:8080 kubectl create namespace demo || true # ignore errors
 
-# Synchronise git repo
-HTTPS_PROXY=localhost:8080 flux create source git podinfo \
-  --url=https://github.com/stefanprodan/podinfo \
-  --tag-semver=">=4.0.0" \
-  --interval=1m
+HTTPS_PROXY=localhost:8080 flux create source helm podinfo \
+--namespace=default \
+--url=https://stefanprodan.github.io/podinfo \
+--interval=10m
 
-HTTPS_PROXY=localhost:8080 flux create kustomization podinfo-default \
-  --source=podinfo \
-  --path="./kustomize" \
-  --prune=true \
-  --interval=10m \
-  --target-namespace=demo
+HTTPS_PROXY=localhost:8080 flux create helmrelease podinfo \
+--namespace=demo \
+--source=HelmRepository/podinfo \
+--release-name=podinfo \
+--chart=podinfo \
+--chart-version=">5.0.0" \
+--values=flux/podinfo-values.yaml
 
+HTTPS_PROXY=localhost:8080 flux get helmreleases -n demo
 
-
-HTTPS_PROXY=localhost:8080 flux get kustomizations -n demo
-
-
-#  --health-check="Deployment/podinfo.default" \
-#  --health-check-timeout=2m \
+#HTTPS_PROXY=localhost:8080 flux -n demo delete source helm podinfo
+#HTTPS_PROXY=localhost:8080 flux -n demo delete helmrelease podinfo
