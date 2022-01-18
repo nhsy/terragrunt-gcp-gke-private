@@ -32,8 +32,8 @@ HTTPS_PROXY=localhost:8080 flux install
 HTTPS_PROXY=localhost:8080 kubectl create namespace demo || true # ignore errors, if ns already exists
 
 HTTPS_PROXY=localhost:8080 flux create source git podinfo \
-  --url=https://github.com/stefanprodan/podinfo \
-  --branch=master \
+  --url=https://github.com/nhsy/podinfo \
+  --branch=demo \
   --interval=30s
 
 HTTPS_PROXY=localhost:8080 flux create kustomization podinfo \
@@ -48,5 +48,5 @@ HTTPS_PROXY=localhost:8080 flux get sources git
 HTTPS_PROXY=localhost:8080 flux get kustomizations
 HTTPS_PROXY=localhost:8080 kubectl -n demo get deployments,services
 
-#HTTPS_PROXY=localhost:8080 flux -n demo delete source git podinfo
-#HTTPS_PROXY=localhost:8080 flux -n demo delete kustomization podinfo
+#HTTPS_PROXY=localhost:8080 flux delete source git podinfo --silent
+#HTTPS_PROXY=localhost:8080 flux delete kustomization podinfo --silent
