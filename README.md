@@ -38,6 +38,7 @@ A GCP project with the following permissions are required:
 
 - roles/container.admin
 - roles/compute.admin
+- roles/resourcemanager.projectIamAdmin
 - roles/serviceusage.serviceUsageAdmin
 - roles/storage.admin
 - roles/iap.tunnelResourceAccessor
