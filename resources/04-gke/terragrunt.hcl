@@ -26,11 +26,11 @@ locals {
   cluster_name_prefix = "private"
   common_vars         = jsondecode(file("${get_parent_terragrunt_dir()}/common_vars.json"))
   machine_type        = lookup(local.common_vars, "gke_machine_type", "e2-standard-2")
-  min_count           = lookup(local.common_vars, "gke_nodes_min", 3)
-  max_count           = lookup(local.common_vars, "gke_nodes_max", 6)
+  min_count           = lookup(local.common_vars, "gke_nodes_min", 1)
+  max_count           = lookup(local.common_vars, "gke_nodes_max", 3)
   node_pool_name      = "private-node-pool"
   preemptible         = lookup(local.common_vars, "preemptible", true)
-  regional            = lookup(local.common_vars, "gke_regional", false)
+  regional            = lookup(local.common_vars, "gke_regional", true)
   skip                = lookup(local.common_vars, "skip_gke", false)
 }
 

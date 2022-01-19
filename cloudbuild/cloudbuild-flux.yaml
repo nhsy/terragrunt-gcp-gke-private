@@ -1,4 +1,4 @@
-timeout: 1800s
+timeout: 1200s
 substitutions:
   _TF_SA_PREFIX: 'terraform'
   _TF_ACTION: 'plan'
@@ -21,21 +21,7 @@ steps:
     sed -i "s/_project_/${PROJECT_ID}/g" common_vars.json 
     cat common_vars.json
 
-- id: 'validate'
-  name: dizzyplan/gcp-devops:amazonlinux
-  entrypoint: '/bin/bash'
-  args:
-  - -c
-  - |
-      set -e
-      echo "Setting up oauth and environment variables"
-      source ./scripts/oauth.sh
-      source ./scripts/env.sh
-      make init
-      make lint
-      make validate
-
-- id: 'action'
+- id: 'flux'
   name: dizzyplan/gcp-devops:amazonlinux
   entrypoint: '/bin/bash'
   args:
@@ -45,8 +31,5 @@ steps:
       echo "Setting up oauth and environment variables"
       source ./scripts/oauth.sh      
       source ./scripts/env.sh
-      make ${_TF_ACTION}
-      # Check cluster connectivity if creating cluster
-      if [[ ${_TF_ACTION} == "apply" ]]; then
-        make tunnel
-      fi
+      make init tunnel
+      ./scripts/flux-install.sh

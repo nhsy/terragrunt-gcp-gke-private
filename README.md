@@ -8,7 +8,7 @@ The following resources are deployed:
 - Cloud NAT
 - Cloud Router
 - Google Cloud Storage
-- GKE Zonal Cluster
+- GKE Cluster
 - Proxy GCE VM
 - VPC
 
@@ -38,9 +38,12 @@ A GCP project with the following permissions are required:
 
 - roles/container.admin
 - roles/compute.admin
+- roles/iam.serviceAccountAdmin
+- roles/iam.serviceAccountUser
+- roles/iap.tunnelResourceAccessor 
+- roles/resourcemanager.projectIamAdmin
 - roles/serviceusage.serviceUsageAdmin
 - roles/storage.admin
-- roles/iap.tunnelResourceAccessor
 
 In order to run the deployment, Google authentication needs to be setup unless using Google Cloud Shell.
 
@@ -82,7 +85,7 @@ For podman:
 ```bash
 git clone https://github.com/nhsy/gcp-devops.git
 cd gcp-devops
-make pod-build
+make podman-build
 ```
 
 To launch the container image and bind mount the current directory execute the following from the root directory of this repository.
