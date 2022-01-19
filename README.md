@@ -41,6 +41,7 @@ A GCP project with the following permissions are required:
 - roles/resourcemanager.projectIamAdmin
 - roles/serviceusage.serviceUsageAdmin
 - roles/storage.admin
+- roles/iam.serviceAccounts.actAs 
 - roles/iap.tunnelResourceAccessor
 
 In order to run the deployment, Google authentication needs to be setup unless using Google Cloud Shell.
