@@ -82,7 +82,7 @@ For podman:
 ```bash
 git clone https://github.com/nhsy/gcp-devops.git
 cd gcp-devops
-make pod-build
+make podman-build
 ```
 
 To launch the container image and bind mount the current directory execute the following from the root directory of this repository.
