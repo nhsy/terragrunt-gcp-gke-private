@@ -3,6 +3,8 @@
 ## Overview
 This example deploys an opinionated GKE Private cluster and demonstrates how to connect to the GKE Private Endpoint using IAP tunneling.
 
+![architecture](docs/architecture.png)
+
 The following resources are deployed:
 
 - Cloud NAT
