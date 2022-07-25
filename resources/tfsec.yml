@@ -8,3 +8,5 @@ exclude:
   - google-gke-no-legacy-auth
   - google-gke-node-pool-uses-cos
   - google-gke-use-service-account
+  - google-gke-metadata-endpoints-disabled
+  - google-gke-use-cluster-labels
