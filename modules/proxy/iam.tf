@@ -1,6 +1,6 @@
 module "service-account" {
   source  = "terraform-google-modules/service-accounts/google"
-  version = "4.0.2"
+  version = "4.1.0"
 
   count = var.service_account_name == null ? 1 : 0
 
@@ -11,7 +11,7 @@ module "service-account" {
 
 module "project-iam-bindings" {
   source  = "terraform-google-modules/iam/google//modules/projects_iam"
-  version = "7.2.0"
+  version = "7.4.1"
 
   projects = [var.project_id]
   mode     = "additive"

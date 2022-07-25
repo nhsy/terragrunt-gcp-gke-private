@@ -39,15 +39,15 @@ generate "versions" {
   if_exists = "overwrite"
   contents  = <<EOF
 terraform {
-  required_version = ">=1.1.0"
+  required_version = ">=1.2.0"
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 3.90.0"
+      version = "~> 4.29.0"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "~> 3.90.0"
+      version = "~> 4.29.0"
     }
     local = {
       source  = "hashicorp/local"

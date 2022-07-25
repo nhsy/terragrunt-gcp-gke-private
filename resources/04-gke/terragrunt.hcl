@@ -35,11 +35,12 @@ locals {
 }
 
 terraform {
-  source = "github.com/terraform-google-modules/terraform-google-kubernetes-engine//modules/beta-private-cluster?ref=v17.1.0"
+  source = "github.com/terraform-google-modules/terraform-google-kubernetes-engine//modules/beta-private-cluster?ref=v22.0.0"
 }
 
 inputs = {
   create_service_account     = true
+  default_max_pods_per_node  = 32
   enable_private_endpoint    = true
   enable_private_nodes       = true
   horizontal_pod_autoscaling = false
@@ -78,13 +79,25 @@ inputs = {
     }
   ]
 
+  node_pools_labels = {
+    all = {}
+
+    private-node-pool = {
+      cluster-name = format("%s-%s", local.cluster_name_prefix, dependency.common.outputs.unique_id)
+    }
+  }
+
   node_pools_oauth_scopes = {
+    all = []
+
     private-node-pool = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
   }
 
   node_pools_tags = {
+    all = []
+
     private-node-pool = [
       format("%s-%s", local.cluster_name_prefix, dependency.common.outputs.unique_id)
     ]

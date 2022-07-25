@@ -5,7 +5,7 @@
 module "vpc" {
   source = "terraform-google-modules/network/google//modules/vpc"
 
-  version                                = "~> 3.4.0"
+  version                                = "~> 5.1.0"
   auto_create_subnetworks                = var.auto_create_subnetworks
   delete_default_internet_gateway_routes = var.delete_default_internet_gateway_routes
   description                            = var.description
@@ -21,7 +21,7 @@ module "vpc" {
 
 module "subnets" {
   source  = "terraform-google-modules/network/google//modules/subnets"
-  version = "~> 3.4.0"
+  version = "~> 5.1.0"
 
   network_name     = module.vpc.network_name
   project_id       = var.project_id
@@ -35,7 +35,7 @@ module "subnets" {
 
 module "routes" {
   source  = "terraform-google-modules/network/google//modules/routes"
-  version = "~> 3.4.0"
+  version = "~> 5.1.0"
 
   module_depends_on = [module.subnets.subnets]
   network_name      = module.vpc.network_name
@@ -49,7 +49,7 @@ module "routes" {
 
 module "firewall" {
   source  = "terraform-google-modules/network/google//modules/fabric-net-firewall"
-  version = "~> 3.4.0"
+  version = "~> 5.1.0"
 
   custom_rules       = var.firewall_custom_rules
   http_source_ranges = var.https_source_ranges
@@ -68,7 +68,7 @@ module "firewall" {
 
 module "cloud-router" {
   source  = "terraform-google-modules/cloud-router/google"
-  version = "~> 1.2.0"
+  version = "~> 3.0.0"
 
   name    = var.router_name
   network = module.vpc.network_self_link

@@ -3,7 +3,7 @@
 ###
 module "project-services" {
   source  = "terraform-google-modules/project-factory/google//modules/project_services"
-  version = "~> 11.1.1"
+  version = "~> 13.0.0"
 
   activate_apis = [
     "compute.googleapis.com",

@@ -1,6 +1,6 @@
 module "instance-template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
-  version = "7.1.0"
+  version = "7.8.0"
 
   disk_size_gb = var.disk_size_gb
   machine_type = var.machine_type
@@ -15,13 +15,14 @@ module "instance-template" {
   subnetwork           = var.subnet_name
   subnetwork_project   = var.project_id
   tags                 = var.tags
+  can_ip_forward       = true
 
   depends_on = [module.service-account]
 }
 
 module "compute-instance" {
   source  = "terraform-google-modules/vm/google//modules/compute_instance"
-  version = "7.1.0"
+  version = "7.8.0"
 
   hostname          = format("%s-%s", var.hostname_prefix, var.unique_id)
   instance_template = module.instance-template.self_link
