@@ -2,4 +2,8 @@
 
 rm -rf resources/*/.terragrunt-cache
 rm -rf resources/*/.terraform.lock.hcl
-pkill -f 'gcloud.*start-iap-tunnel'
+
+# Kill IAP tunnel
+if command -v pkill; then
+  pkill -f 'gcloud.*start-iap-tunnel'
+fi
