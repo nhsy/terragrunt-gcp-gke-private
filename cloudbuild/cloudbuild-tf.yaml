@@ -30,6 +30,8 @@ steps:
   - -c
   - |
       set -e
+      gcloud config list
+      gcloud info    
       echo "Setting up oauth and environment variables"
       source ./scripts/oauth.sh
       source ./scripts/env.sh
