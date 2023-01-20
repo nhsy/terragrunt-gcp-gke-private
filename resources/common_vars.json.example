@@ -1,4 +1,5 @@
 {
   "project_id": "_project_",
-  "region": "europe-west1"
+  "region": "europe-west1",
+  "gke_regional": false
 }
