@@ -14,8 +14,6 @@ steps:
     tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
     if [[ -n ${tf_sa_email} ]]; then
       echo "Setting up gcloud for impersonation"
-      gcloud config list
-      gcloud info
       gcloud config set auth/impersonate_service_account $tf_sa_email
     fi
     cd resources
@@ -33,6 +31,7 @@ steps:
       gcloud config list
       gcloud info    
       echo "Setting up oauth and environment variables"
+      gcloud auth print-access-token
       source ./scripts/oauth.sh
       source ./scripts/env.sh
       make init
