@@ -29,7 +29,6 @@ steps:
   - |
       set -e
       echo "Setting up oauth and environment variables"
-      gcloud auth print-access-token
       source ./scripts/oauth.sh
       source ./scripts/env.sh
       make init
