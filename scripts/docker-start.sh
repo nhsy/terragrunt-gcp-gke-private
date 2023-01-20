@@ -7,4 +7,4 @@ docker run -ti --rm \
     -v "$(pwd)":/work \
     -w /work \
     --name $NAME \
-    gcp-devops
+    dizzyplan/gcp-devops-image

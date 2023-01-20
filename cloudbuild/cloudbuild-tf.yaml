@@ -1,16 +1,15 @@
 timeout: 1800s
 substitutions:
   _TF_SA_PREFIX: 'terraform'
-  _TF_ACTION: 'plan'
 
 steps:
 - id: 'setup'
-  name: dizzyplan/gcp-devops:amazonlinux
+  name: dizzyplan/gcp-devops-image
   entrypoint: '/bin/bash'
   args:
   - -c
   - |
-    set -e    
+    set -e
     tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
     if [[ -n ${tf_sa_email} ]]; then
       echo "Setting up gcloud for impersonation"
@@ -22,7 +21,7 @@ steps:
     cat common_vars.json
 
 - id: 'validate'
-  name: dizzyplan/gcp-devops:amazonlinux
+  name: dizzyplan/gcp-devops-image
   entrypoint: '/bin/bash'
   args:
   - -c
@@ -36,7 +35,7 @@ steps:
       make validate
 
 - id: 'action'
-  name: dizzyplan/gcp-devops:amazonlinux
+  name: dizzyplan/gcp-devops-image
   entrypoint: '/bin/bash'
   args:
     - -c
@@ -45,6 +44,7 @@ steps:
       echo "Setting up oauth and environment variables"
       source ./scripts/oauth.sh      
       source ./scripts/env.sh
+      make init
       make ${_TF_ACTION}
       # Check cluster connectivity if creating cluster
       if [[ ${_TF_ACTION} == "apply" ]]; then

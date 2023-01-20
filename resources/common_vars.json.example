@@ -1,4 +1,6 @@
 {
   "project_id": "_project_",
-  "region": "europe-west1"
+  "region": "europe-west2",
+  "gke_machine_type": "e2-standard-2",
+  "gke_regional": false
 }

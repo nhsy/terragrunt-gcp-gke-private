@@ -5,7 +5,7 @@ substitutions:
 
 steps:
 - id: 'setup'
-  name: dizzyplan/gcp-devops:amazonlinux
+  name: dizzyplan/gcp-devops-image
   entrypoint: '/bin/bash'
   args:
   - -c
@@ -22,7 +22,7 @@ steps:
     cat common_vars.json
 
 - id: 'flux'
-  name: dizzyplan/gcp-devops:amazonlinux
+  name: dizzyplan/gcp-devops-image
   entrypoint: '/bin/bash'
   args:
     - -c

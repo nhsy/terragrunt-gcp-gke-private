@@ -17,7 +17,7 @@ if [[ -z "$GKE_CLUSTER" ]]; then
 fi
 
 # Install flux cli
-command -v flux || curl -s https://fluxcd.io/install.sh | sudo bash
+command -v flux || curl -s https://fluxcd.io/install.sh | bash
 
 HTTPS_PROXY=localhost:8080 flux check --pre
 

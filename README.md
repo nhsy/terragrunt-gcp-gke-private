@@ -38,14 +38,41 @@ All the tools above a pre-installed with Google Cloud Shell, except Terraform, T
 ### IAM
 A GCP project with the following permissions are required:
 
-- roles/container.admin
 - roles/compute.admin
+- roles/container.admin
 - roles/iam.serviceAccountAdmin
 - roles/iam.serviceAccountUser
 - roles/iap.tunnelResourceAccessor 
 - roles/resourcemanager.projectIamAdmin
 - roles/serviceusage.serviceUsageAdmin
 - roles/storage.admin
+
+Create terraform service account with the permissions as follows:
+```bash
+export PROJECT_ID=
+export PROJECT_NUMBER=
+gcloud iam service-accounts create terraform --description="Terraform Service Account" --display-name="terraform"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/compute.admin"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/container.admin"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/iam.serviceAccountAdmin"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/iam.serviceAccountUser"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/iap.tunnelResourceAccessor"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/resourcemanager.projectIamAdmin"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/serviceusage.serviceUsageAdmin"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform@$PROJECT_ID.iam.gserviceaccount.com" --role="roles/storage.admin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role="roles/iam.serviceAccountUser"
+gcloud iam service-accounts add-iam-policy-binding terraform@$PROJECT_ID.iam.gserviceaccount.com --member="serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com" --role="roles/iam.serviceAccountTokenCreator"
+```
+
+Enable google services needed to bootstrap and run a plan:
+```bash
+gcloud services enable cloudbuild.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com
+gcloud services enable compute.googleapis.com
+gcloud services enable container.googleapis.com
+gcloud services enable iamcredentials.googleapis.com
+```
 
 In order to run the deployment, Google authentication needs to be setup unless using Google Cloud Shell.
 
