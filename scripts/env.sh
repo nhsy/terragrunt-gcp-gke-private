@@ -17,3 +17,5 @@ env | grep "TG_"
 
 alias kp='HTTPS_PROXY=localhost:8080 kubectl $*'
 alias np='HTTPS_PROXY=localhost:8080 nomos $*'
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True

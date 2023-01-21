@@ -18,8 +18,6 @@ fi
 
 # check cluster connectivity
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-gke-gcloud-auth-plugin --version
-kubectl version
 HTTPS_PROXY=localhost:8080 kubectl cluster-info
 
 # Install flux cli
