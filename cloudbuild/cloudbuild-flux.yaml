@@ -32,7 +32,7 @@ steps:
       source ./scripts/oauth.sh      
       source ./scripts/env.sh
       make init tunnel
-      if [[ ${_TF_ACTION} == "install" ]]; then
+      if [[ ${_ACTION} == "install" ]]; then
         ./scripts/flux-install.sh
       fi
 
