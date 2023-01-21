@@ -16,6 +16,9 @@ if [[ -z "$GKE_CLUSTER" ]]; then
   exit 1
 fi
 
+# check cluster connectitivy
+HTTPS_PROXY=localhost:8080 kubectl cluster-info
+
 # Install flux cli
 command -v flux || curl -s https://fluxcd.io/install.sh | bash
 
