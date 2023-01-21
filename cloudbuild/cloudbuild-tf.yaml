@@ -10,8 +10,8 @@ steps:
   - -c
   - |
     set -e
-    tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
-    if [[ -n ${tf_sa_email} ]]; then
+    if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
+      tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
       echo "Setting up gcloud for impersonation"
       gcloud config set auth/impersonate_service_account $tf_sa_email
     fi
@@ -26,13 +26,16 @@ steps:
   args:
   - -c
   - |
-      set -e
-      echo "Setting up oauth and environment variables"
-      source ./scripts/oauth.sh
-      source ./scripts/env.sh
-      make init
-      make lint
-      make validate
+    set -e
+    echo "Setting up environment variables"
+    source ./scripts/env.sh      
+    if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
+      echo "Setting up oauth"
+      source ./scripts/oauth.sh      
+    fi
+    make init
+    make lint
+    make validate
 
 - id: 'action'
   name: dizzyplan/gcp-devops-image
@@ -41,9 +44,12 @@ steps:
     - -c
     - |
       set -e
-      echo "Setting up oauth and environment variables"
-      source ./scripts/oauth.sh      
+      echo "Setting up environment variables"
       source ./scripts/env.sh
+      if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
+        echo "Setting up oauth"
+        source ./scripts/oauth.sh
+      fi
       make init
       make ${_TF_ACTION}
       # Check cluster connectivity if creating cluster
