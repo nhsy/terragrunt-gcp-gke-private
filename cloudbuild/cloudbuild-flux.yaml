@@ -11,8 +11,9 @@ steps:
   - -c
   - |
     set -e    
-    tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
-    if [[ -n ${tf_sa_email} ]]; then
+    
+    if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
+      tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
       echo "Setting up gcloud for impersonation"
       gcloud config set auth/impersonate_service_account $tf_sa_email
     fi
