@@ -16,7 +16,8 @@ if [[ -z "$GKE_CLUSTER" ]]; then
   exit 1
 fi
 
-# check cluster connectitivy
+# check cluster connectivity
+kubectl version
 HTTPS_PROXY=localhost:8080 kubectl cluster-info
 
 # Install flux cli
