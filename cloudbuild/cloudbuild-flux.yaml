@@ -10,8 +10,7 @@ steps:
   args:
   - -c
   - |
-    set -e    
-    
+    set -e
     if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
       tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
       echo "Setting up gcloud for impersonation"
