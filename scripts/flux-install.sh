@@ -17,6 +17,7 @@ if [[ -z "$GKE_CLUSTER" ]]; then
 fi
 
 # check cluster connectivity
+gke-gcloud-auth-plugin version
 kubectl version
 HTTPS_PROXY=localhost:8080 kubectl cluster-info
 
