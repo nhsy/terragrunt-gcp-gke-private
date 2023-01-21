@@ -44,5 +44,5 @@ HTTPS_PROXY=localhost:8080 flux get sources git
 HTTPS_PROXY=localhost:8080 flux get kustomizations
 HTTPS_PROXY=localhost:8080 kubectl -n demo get deployments,services
 
-#HTTPS_PROXY=localhost:8080 flux delete source git podinfo --silent
-#HTTPS_PROXY=localhost:8080 flux delete kustomization podinfo --silent
+#HTTPS_PROXY=localhost:8080 flux delete source git wordpress --silent
+#HTTPS_PROXY=localhost:8080 flux delete kustomization wordpress --silent

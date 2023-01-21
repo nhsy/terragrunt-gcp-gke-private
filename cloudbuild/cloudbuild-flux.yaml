@@ -1,7 +1,7 @@
 timeout: 1200s
 substitutions:
-  _TF_SA_PREFIX: 'terraform'
-  _TF_ACTION: 'plan'
+  _TF_SA_PREFIX: ''
+  _ACTION: 'install'
 
 steps:
 - id: 'setup'
@@ -32,4 +32,9 @@ steps:
       source ./scripts/oauth.sh      
       source ./scripts/env.sh
       make init tunnel
-      ./scripts/flux-install.sh
+      if [[ ${_TF_ACTION} == "install" ]]; then
+        ./scripts/flux-install.sh
+      fi
+
+options:
+  logging: CLOUD_LOGGING_ONLY
