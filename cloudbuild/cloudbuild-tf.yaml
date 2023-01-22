@@ -13,7 +13,7 @@ steps:
     if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
       echo "Setting up gcloud for impersonation"
       tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
-      //gcloud config set auth/impersonate_service_account $tf_sa_email
+      #gcloud config set auth/impersonate_service_account $tf_sa_email
       export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=$tf_sa_email
     fi
     cd resources
