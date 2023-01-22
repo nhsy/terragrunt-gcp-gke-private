@@ -12,9 +12,10 @@ steps:
   - |
     set -e
     if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
-      tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
       echo "Setting up gcloud for impersonation"
+      tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
       gcloud config set auth/impersonate_service_account $tf_sa_email
+      export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=$tf_sa_email
     fi
     cd resources
     cp common_vars.json.example common_vars.json
@@ -31,8 +32,9 @@ steps:
     echo "Setting up environment variables"
     source ./scripts/env.sh      
     if [[ ! -z "${_TF_SA_PREFIX}" ]]; then
-      echo "Setting up oauth"
-      source ./scripts/oauth.sh      
+      echo "Setting up impersonation"
+      tf_sa_email=${_TF_SA_PREFIX}@${PROJECT_ID}.iam.gserviceaccount.com
+      export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=$tf_sa_email
     fi
     make init tunnel
     if [[ ${_ACTION} == "install" ]]; then
