@@ -76,6 +76,7 @@ inputs = {
       machine_type       = local.machine_type
       disk_size_gb       = "50"
       disk_type          = "pd-ssd"
+      auto_upgrade       = true
     }
   ]
 
