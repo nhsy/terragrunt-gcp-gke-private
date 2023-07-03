@@ -1,3 +1,7 @@
+locals {
+  common_vars = jsondecode(file("${get_parent_terragrunt_dir()}/common_vars.json"))
+}
+
 remote_state {
   backend = "gcs"
 
@@ -17,6 +21,22 @@ terraform {
 }
 EOF
 }
+
+# Uncomment to enable terraform cloud backend
+#generate "backend" {
+#  path      = "backend.tf"
+#  if_exists = "overwrite"
+#  contents  = <<EOF
+#terraform {
+#  cloud {
+#    organization = "${local.common_vars.tfc_org}"
+#    workspaces {
+#      name = "terragrunt-gcp-gke-private-${path_relative_to_include()}"
+#    }
+#  }
+#}
+#EOF
+#}
 
 generate "providers" {
   path      = "providers.tf"
