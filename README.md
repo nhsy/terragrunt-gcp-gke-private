@@ -78,7 +78,8 @@ In order to run the deployment, Google authentication needs to be setup unless u
 
 If a service account is being used, set the environment `GOOGLE_APPLICATION_CREDENTIALS` as follows:
 ```bash
-export GOOGLE_APPLICATION_CREDENTIALS=/path-to-credentials.json
+gcloud iam service-accounts keys create terraform-${PROJECT_ID}.json --iam-account=terraform@${PROJECT_ID}.iam.gserviceaccount.com
+export GOOGLE_APPLICATION_CREDENTIALS=terraform-${PROJECT_ID}.json
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 ````
 
@@ -95,37 +96,6 @@ Create the file resources/common_vars.json as follows:
   "project_id": "_project_",
   "region": "_region_"
 }
-```
-### Optional Local Setup 
-The command `sudo make setup` will download and install terraform, terragrunt and tfsec.
-
-### Optional Docker / Podman Setup
-A container image containing all the tools pre-installed for local development can be created by cloning the repository https://github.com/nhsy/gcp-devops.
-
-Please ensure either Docker or Podman is pre-installed and execute one of the following to build the container locally.
-
-For docker:
-```bash
-git clone https://github.com/nhsy/gcp-devops.git
-cd gcp-devops
-make build
-```
-For podman:
-```bash
-git clone https://github.com/nhsy/gcp-devops.git
-cd gcp-devops
-make podman-build
-```
-
-To launch the container image and bind mount the current directory execute the following from the root directory of this repository.
-
-For docker:
-```bash
-./scripts/docker-start.sh
-```
-For podman:
-```bash
-./scripts/podman-start.sh
 ```
 
 ## Usage

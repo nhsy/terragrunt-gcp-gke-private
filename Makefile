@@ -19,10 +19,22 @@ pre-reqs:
 	$(call header,$@)
 	@scripts/pre-reqs.sh
 
+.PHONY: bootstrap-apply
+bootstrap-apply:
+	$(call header,$@)
+	@scripts/bootstrap.sh init
+	@scripts/bootstrap.sh apply
+
+.PHONY: bootstrap-plan
+bootstrap-plan:
+	$(call header,$@)
+	@scripts/bootstrap.sh init
+	@scripts/bootstrap.sh plan
+
 .PHONY: init
 init:
 	$(call header,$@)
-	@scripts/backend.sh init
+	@scripts/backend.sh
 	@scripts/tg-wrapper.sh init
 
 .PHONY: validate
@@ -74,6 +86,7 @@ tunnel-ssh:
 config-sync:
 	$(call header,$@)
 	@scripts/config-sync-install.sh
+
 
 .PHONY: all
 all: pre-reqs init validate apply
